@@ -3,11 +3,6 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const {
-  isTokenBlacklisted,
-  verifyToken,
-  blacklistToken,
-} = require("./middleware/auth.js");
 require("dotenv").config();
 
 const app = express();
@@ -83,11 +78,6 @@ app.post("/verify", (req, res) => {
 app.post("/logout", (req, res) => {
   // Add logic to handle logout if needed (e.g., invalidating the token)
   res.status(200).send({ message: "Logout successful" });
-});
-
-// Protected route example
-app.get("/dashboard", isTokenBlacklisted, verifyToken, (req, res) => {
-  res.status(200).send({ message: "Welcome to the dashboard" });
 });
 
 // Start the server
